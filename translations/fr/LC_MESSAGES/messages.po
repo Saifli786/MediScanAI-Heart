@@ -1,0 +1,75 @@
+# French translations for MediScanAI-Heart
+# Copyright (C) 2025 MediScanAI
+# This file is distributed under the same license as the MediScanAI-Heart package.
+msgid ""
+msgstr ""
+"Project-Id-Version: MediScanAI-Heart 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-09 10:00+0000\n"
+"PO-Revision-Date: 2025-01-09 10:00+0000\n"
+"Last-Translator: MediScanAI Team\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Home"
+msgstr "Accueil"
+
+msgid "Dataset"
+msgstr "Jeu de données"
+
+msgid "Train"
+msgstr "Entraîner"
+
+msgid "Evaluate"
+msgstr "Évaluer"
+
+msgid "Predict"
+msgstr "Prédire"
+
+msgid "Language"
+msgstr "Langue"
+
+msgid "Dark"
+msgstr "Sombre"
+
+msgid "Light"
+msgstr "Clair"
+
+msgid "Patient History"
+msgstr "Historique des patients"
+
+msgid "Welcome to MediScanAI"
+msgstr "Bienvenue sur MediScanAI"
+
+msgid "Advanced Heart Disease Prediction System using Machine Learning"
+msgstr "Système avancé de prédiction des maladies cardiaques utilisant l'apprentissage automatique"
+
+msgid "Heart Disease Prediction"
+msgstr "Prédiction des maladies cardiaques"
+
+msgid "Enter patient details to predict the likelihood of heart disease."
+msgstr "Entrez les détails du patient pour prédire la probabilité de maladie cardiaque."
+
+msgid "Prediction Result"
+msgstr "Résultat de prédiction"
+
+msgid "Heart Disease Prediction:"
+msgstr "Prédiction de maladie cardiaque :"
+
+msgid "POSITIVE"
+msgstr "POSITIF"
+
+msgid "NEGATIVE"
+msgstr "NÉGATIF"
+
+msgid "Risk Probability"
+msgstr "Probabilité de risque"
+
+msgid "This patient shows signs of heart disease. Please consult a cardiologist for further evaluation."
+msgstr "Ce patient présente des signes de maladie cardiaque. Veuillez consulter un cardiologue pour une évaluation plus approfondie."
+
+msgid "No significant heart disease indicators detected. Maintain healthy lifestyle habits."
+msgstr "Aucun indicateur significatif de maladie cardiaque détecté. Maintenez des habitudes de vie saines."

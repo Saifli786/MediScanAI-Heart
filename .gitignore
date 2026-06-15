@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.toast
+.cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Databases
+predictions.db
+predictions.db-journal
+
+# Models and temporary files
+models/*.joblib
+exports/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+build/
+
+# OS / IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

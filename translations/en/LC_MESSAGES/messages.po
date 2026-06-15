@@ -1,0 +1,75 @@
+# English translations for MediScanAI-Heart
+# Copyright (C) 2025 MediScanAI
+# This file is distributed under the same license as the MediScanAI-Heart package.
+msgid ""
+msgstr ""
+"Project-Id-Version: MediScanAI-Heart 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-09 10:00+0000\n"
+"PO-Revision-Date: 2025-01-09 10:00+0000\n"
+"Last-Translator: MediScanAI Team\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Dataset"
+msgstr "Dataset"
+
+msgid "Train"
+msgstr "Train"
+
+msgid "Evaluate"
+msgstr "Evaluate"
+
+msgid "Predict"
+msgstr "Predict"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Dark"
+msgstr "Dark"
+
+msgid "Light"
+msgstr "Light"
+
+msgid "Patient History"
+msgstr "Patient History"
+
+msgid "Welcome to MediScanAI"
+msgstr "Welcome to MediScanAI"
+
+msgid "Advanced Heart Disease Prediction System using Machine Learning"
+msgstr "Advanced Heart Disease Prediction System using Machine Learning"
+
+msgid "Heart Disease Prediction"
+msgstr "Heart Disease Prediction"
+
+msgid "Enter patient details to predict the likelihood of heart disease."
+msgstr "Enter patient details to predict the likelihood of heart disease."
+
+msgid "Prediction Result"
+msgstr "Prediction Result"
+
+msgid "Heart Disease Prediction:"
+msgstr "Heart Disease Prediction:"
+
+msgid "POSITIVE"
+msgstr "POSITIVE"
+
+msgid "NEGATIVE"
+msgstr "NEGATIVE"
+
+msgid "Risk Probability"
+msgstr "Risk Probability"
+
+msgid "This patient shows signs of heart disease. Please consult a cardiologist for further evaluation."
+msgstr "This patient shows signs of heart disease. Please consult a cardiologist for further evaluation."
+
+msgid "No significant heart disease indicators detected. Maintain healthy lifestyle habits."
+msgstr "No significant heart disease indicators detected. Maintain healthy lifestyle habits."

@@ -1,0 +1,75 @@
+# Hindi translations for MediScanAI-Heart
+# Copyright (C) 2025 MediScanAI
+# This file is distributed under the same license as the MediScanAI-Heart package.
+msgid ""
+msgstr ""
+"Project-Id-Version: MediScanAI-Heart 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-09 10:00+0000\n"
+"PO-Revision-Date: 2025-01-09 10:00+0000\n"
+"Last-Translator: MediScanAI Team\n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Home"
+msgstr "होम"
+
+msgid "Dataset"
+msgstr "डेटासेट"
+
+msgid "Train"
+msgstr "ट्रेन"
+
+msgid "Evaluate"
+msgstr "मूल्यांकन"
+
+msgid "Predict"
+msgstr "पूर्वानुमान"
+
+msgid "Language"
+msgstr "भाषा"
+
+msgid "Dark"
+msgstr "डार्क"
+
+msgid "Light"
+msgstr "लाइट"
+
+msgid "Patient History"
+msgstr "रोगी इतिहास"
+
+msgid "Welcome to MediScanAI"
+msgstr "मेडिस्कैनएआई में आपका स्वागत है"
+
+msgid "Advanced Heart Disease Prediction System using Machine Learning"
+msgstr "मशीन लर्निंग का उपयोग करके उन्नत हृदय रोग भविष्यवाणी प्रणाली"
+
+msgid "Heart Disease Prediction"
+msgstr "हृदय रोग भविष्यवाणी"
+
+msgid "Enter patient details to predict the likelihood of heart disease."
+msgstr "हृदय रोग की संभावना का पूर्वानुमान करने के लिए रोगी का विवरण दर्ज करें।"
+
+msgid "Prediction Result"
+msgstr "पूर्वानुमान परिणाम"
+
+msgid "Heart Disease Prediction:"
+msgstr "हृदय रोग भविष्यवाणी:"
+
+msgid "POSITIVE"
+msgstr "सकारात्मक"
+
+msgid "NEGATIVE"
+msgstr "नकारात्मक"
+
+msgid "Risk Probability"
+msgstr "जोखिम संभावना"
+
+msgid "This patient shows signs of heart disease. Please consult a cardiologist for further evaluation."
+msgstr "इस रोगी में हृदय रोग के लक्षण दिखाई दे रहे हैं। आगे की जांच के लिए कृपया हृदय रोग विशेषज्ञ से सलाह लें।"
+
+msgid "No significant heart disease indicators detected. Maintain healthy lifestyle habits."
+msgstr "कोई महत्वपूर्ण हृदय रोग संकेतक नहीं पाए गए। स्वस्थ जीवनशैली बनाए रखें।"

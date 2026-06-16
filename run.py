@@ -482,6 +482,50 @@ def kill_frontend():
 
 atexit.register(kill_frontend)
 
+def check_and_retrain_models():
+    """
+    Check if the trained models are compatible with the current scikit-learn version.
+    If there is a mismatch or if the models are missing, retrain them.
+    """
+    import warnings
+    from sklearn.exceptions import InconsistentVersionWarning
+    
+    models_to_check = ['logistic_regression', 'decision_tree', 'random_forest', 'scaler']
+    retrain_needed = False
+    
+    # Check if files exist. If not, we definitely need to train.
+    for name in models_to_check:
+        path = os.path.join('models', f'{name}.joblib')
+        if not os.path.exists(path):
+            retrain_needed = True
+            break
+            
+    if not retrain_needed:
+        # Check for InconsistentVersionWarning by attempting to load them inside a warnings catch filter
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always", InconsistentVersionWarning)
+            try:
+                import joblib
+                for name in models_to_check:
+                    joblib.load(os.path.join('models', f'{name}.joblib'))
+                # If any warning was caught, we need to retrain
+                for warning in w:
+                    if issubclass(warning.category, InconsistentVersionWarning):
+                        retrain_needed = True
+                        break
+            except Exception:
+                # If loading fails entirely for any reason, retrain
+                retrain_needed = True
+
+    if retrain_needed:
+        print("[*] Scikit-learn version mismatch or missing models detected. Retraining models to match current environment...")
+        try:
+            from src.train import train_models
+            train_models()
+            print("[+] Models successfully retrained and saved.")
+        except Exception as e:
+            print(f"[!] Failed to automatically retrain models: {e}")
+
 def start_frontend_and_browser():
     global frontend_process
     
@@ -525,6 +569,10 @@ def start_frontend_and_browser():
         print("[!] Next.js server start timeout. Please open http://localhost:3000 manually.")
 
 if __name__ == '__main__':
+    # Retrain models if needed in the parent process to avoid double execution
+    if os.environ.get('WERKZEUG_RUN_MAIN') != 'true':
+        check_and_retrain_models()
+
     t = threading.Thread(target=start_frontend_and_browser)
     t.daemon = True
     t.start()

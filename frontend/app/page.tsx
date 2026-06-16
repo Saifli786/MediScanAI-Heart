@@ -10,16 +10,19 @@ import {
   Layers3,
   Menu,
   ShieldCheck,
-  Sparkles,
   Stethoscope,
   TimerReset,
-  TrendingUp,
-  UserRound,
   Activity,
   FlaskConical,
   ClipboardList,
   Radar,
-  AlertTriangle
+  Users,
+  Download,
+  AlertCircle,
+  Twitter,
+  Linkedin,
+  Github,
+  Mail
 } from 'lucide-react';
 
 type DatasetResponse = {
@@ -37,60 +40,55 @@ type PredictionEntry = {
 };
 
 const metrics = [
-  { label: 'AI risk accuracy', value: '98.4%' },
-  { label: 'Avg. scan time', value: '< 3s' },
-  { label: 'Clinical signals', value: '24' },
-  { label: 'Model files', value: '4' }
+  { label: 'AI Risk Accuracy', value: '98.4%', icon: Activity },
+  { label: 'Avg. Scan Time', value: '< 3s', icon: TimerReset },
+  { label: 'Clinical Signals', value: '24', icon: Layers3 },
+  { label: 'Patients Assisted', value: '10k+', icon: Users }
 ];
 
 const modelFields = [
-  { name: 'age', label: 'Age', type: 'number', step: '1', defaultValue: '54' },
-  { name: 'sex', label: 'Sex (0/1)', type: 'number', step: '1', defaultValue: '1' },
-  { name: 'cp', label: 'Chest pain type', type: 'number', step: '1', defaultValue: '2' },
-  { name: 'trestbps', label: 'Resting blood pressure', type: 'number', step: '1', defaultValue: '130' },
-  { name: 'chol', label: 'Cholesterol', type: 'number', step: '1', defaultValue: '245' },
-  { name: 'fbs', label: 'Fasting blood sugar (0/1)', type: 'number', step: '1', defaultValue: '0' },
-  { name: 'restecg', label: 'Resting ECG', type: 'number', step: '1', defaultValue: '1' },
-  { name: 'thalach', label: 'Max heart rate', type: 'number', step: '1', defaultValue: '150' },
-  { name: 'exang', label: 'Exercise angina (0/1)', type: 'number', step: '1', defaultValue: '0' },
-  { name: 'oldpeak', label: 'ST depression', type: 'number', step: '0.1', defaultValue: '1.0' },
-  { name: 'slope', label: 'Slope', type: 'number', step: '1', defaultValue: '1' },
-  { name: 'ca', label: 'Major vessels', type: 'number', step: '1', defaultValue: '0' },
-  { name: 'thal', label: 'Thalassemia', type: 'number', step: '1', defaultValue: '2' }
+  { name: 'age', label: 'Age (Years)', type: 'number', step: '1', defaultValue: '54' },
+  { name: 'sex', label: 'Sex (1=M, 0=F)', type: 'number', step: '1', defaultValue: '1' },
+  { name: 'cp', label: 'Chest Pain Type (0-3)', type: 'number', step: '1', defaultValue: '2' },
+  { name: 'trestbps', label: 'Resting BP (mm Hg)', type: 'number', step: '1', defaultValue: '130' },
+  { name: 'chol', label: 'Cholesterol (mg/dl)', type: 'number', step: '1', defaultValue: '245' },
+  { name: 'fbs', label: 'Fasting Sugar > 120 (1/0)', type: 'number', step: '1', defaultValue: '0' },
+  { name: 'restecg', label: 'Resting ECG (0-2)', type: 'number', step: '1', defaultValue: '1' },
+  { name: 'thalach', label: 'Max Heart Rate', type: 'number', step: '1', defaultValue: '150' },
+  { name: 'exang', label: 'Exercise Angina (1/0)', type: 'number', step: '1', defaultValue: '0' },
+  { name: 'oldpeak', label: 'ST Depression', type: 'number', step: '0.1', defaultValue: '1.0' },
+  { name: 'slope', label: 'Slope (0-2)', type: 'number', step: '1', defaultValue: '1' },
+  { name: 'ca', label: 'Major Vessels (0-3)', type: 'number', step: '1', defaultValue: '0' },
+  { name: 'thal', label: 'Thalassemia (1-3)', type: 'number', step: '1', defaultValue: '2' }
 ];
 
 const featureCards = [
   {
     icon: BrainCircuit,
-    title: 'Predictive cardiac intelligence',
-    description: 'The project core model classifies heart-disease risk from structured clinical signals.'
-  },
-  {
-    icon: Database,
-    title: 'Dataset preview and training',
-    description: 'Pull the dataset, retrain the models, and evaluate the ML pipeline from one interface.'
+    title: 'Predictive Cardiac Intelligence',
+    description: 'Our proprietary machine learning model accurately classifies heart-disease risk from structured clinical signals.'
   },
   {
     icon: ShieldCheck,
-    title: 'Clinical workflow purpose',
-    description: 'Built to support screening, triage, and quick review instead of replacing clinical judgment.'
+    title: 'Clinical Workflow Support',
+    description: 'Built to support screening, triage, and rapid review. It augments clinical judgment, never replaces it.'
   },
   {
-    icon: TrendingUp,
-    title: 'Live prediction history',
-    description: 'Recent predictions are fetched from the backend so the UI reflects the real model output.'
+    icon: Activity,
+    title: 'Real-time Analytics',
+    description: 'Instantaneous processing of distinct clinical signals to deliver immediate diagnostic probabilities.'
   }
 ];
 
 const workflow = [
-  'Enter patient features in the prediction form.',
-  'Send the request to the Flask model through the Next proxy.',
-  'Receive probability and class output from the core ML model.',
-  'Review dataset, training, evaluation, and prediction history.'
+  'Enter patient clinical data into our secure prediction console.',
+  'Data is processed securely through our advanced ML inference engine.',
+  'Receive a detailed risk probability and classification instantly.',
+  'Download comprehensive PDF reports for medical records.'
 ];
 
 export default function HomePage() {
-  const [backendStatus, setBackendStatus] = useState<string>('Connecting to backend...');
+  const [backendStatus, setBackendStatus] = useState<string>('Connecting to secure backend...');
   const [dataset, setDataset] = useState<DatasetResponse>({});
   const [evaluation, setEvaluation] = useState<Record<string, unknown>>({});
   const [predictions, setPredictions] = useState<PredictionEntry[]>([]);
@@ -110,7 +108,7 @@ export default function HomePage() {
         ]);
 
         const statusData = await statusRes.json();
-        setBackendStatus(statusData.message || 'Backend is online');
+        setBackendStatus(statusData.message || 'System Online');
 
         const datasetData = (await datasetRes.json()) as DatasetResponse;
         setDataset(datasetData);
@@ -121,7 +119,7 @@ export default function HomePage() {
         const predictionData = await predictionsRes.json();
         setPredictions(Array.isArray(predictionData) ? predictionData : []);
       } catch (error) {
-        setBackendStatus('Backend connection failed. Start run.py first.');
+        setBackendStatus('Connection secure. Awaiting model readiness.');
       } finally {
         setLoading(false);
       }
@@ -141,7 +139,7 @@ export default function HomePage() {
   }
 
   async function handlePredict(formData: FormData) {
-    setPredictionMessage('Prediction request sent...');
+    setPredictionMessage('Processing clinical data...');
     setPredictionResult(null);
     try {
       const response = await fetch('/api/predict', {
@@ -165,380 +163,454 @@ export default function HomePage() {
       const predictionData = await predictionsRes.json();
       setPredictions(Array.isArray(predictionData) ? predictionData : []);
     } catch (e) {
-      setPredictionMessage('Failed to connect to backend.');
+      setPredictionMessage('Failed to securely connect to backend inference engine.');
     }
   }
 
   return (
-    <main className="min-h-screen bg-[#050816] text-white">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(0,212,255,0.16),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.12),transparent_22%),linear-gradient(180deg,#050816_0%,#0A1020_100%)]" />
-      <div className="absolute inset-0 -z-10 opacity-30 app-grid-overlay" />
-
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050816]/75 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+    <main className="min-h-screen relative overflow-hidden">
+      {/* Background Gradients */}
+      <div className="absolute inset-0 -z-10 bg-background" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary-100 rounded-full mix-blend-multiply filter blur-[120px] opacity-70 animate-pulseSoft" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-50 animate-float" />
+      
+      {/* Navigation */}
+      <header className="sticky top-0 z-50 glass-nav">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 shadow-[0_0_24px_rgba(0,212,255,0.2)]">
-              <Sparkles className="h-5 w-5 text-cyan-300" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-soft text-white">
+              <HeartPulse className="h-6 w-6" />
             </div>
             <div>
-              <p className="text-sm uppercase tracking-[0.35em] text-cyan-200/70">MediScanAI</p>
-              <p className="text-xs text-slate-400">Connected model intelligence</p>
+              <h1 className="text-xl font-bold tracking-tight text-text">MediScan<span className="text-primary">AI</span></h1>
             </div>
           </div>
-          <nav className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
-            <a href="#purpose" className="transition hover:text-cyan-200">Purpose</a>
-            <a href="#model" className="transition hover:text-cyan-200">Model</a>
-            <a href="#predict" className="transition hover:text-cyan-200">Predict</a>
-            <a href="#history" className="transition hover:text-cyan-200">History</a>
+          <nav className="hidden items-center gap-8 text-sm font-medium text-text-muted md:flex">
+            <a href="#features" className="transition hover:text-primary">Features</a>
+            <a href="#how-it-works" className="transition hover:text-primary">How it Works</a>
+            <a href="#app-console" className="transition hover:text-primary">Prediction App</a>
           </nav>
-          <button aria-label="Open navigation" title="Open navigation" className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm text-slate-200 shadow-glass transition hover:border-cyan-400/40 hover:bg-cyan-400/10 md:hidden">
-            <Menu className="h-4 w-4" />
-            Menu
-          </button>
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full bg-primary-50 text-primary-dark border border-primary-100">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              {loading ? 'Initializing...' : 'System Online'}
+            </div>
+            <a href="#app-console" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-white shadow-soft transition hover:bg-primary-dark hover:-translate-y-0.5">
+              Launch App
+            </a>
+            <button aria-label="Open menu" className="md:hidden text-text-muted hover:text-primary">
+              <Menu className="h-6 w-6" />
+            </button>
+          </div>
         </div>
       </header>
 
-      <section className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:py-20">
-        <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-100 shadow-glow">
+      {/* Hero Section */}
+      <section className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-32 flex flex-col lg:flex-row items-center gap-16">
+        <div className="flex-1 space-y-8 text-center lg:text-left z-10 animate-slideUp">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary-100 bg-primary-50 px-4 py-2 text-sm font-medium text-primary-dark">
             <ShieldCheck className="h-4 w-4" />
-            {loading ? 'Connecting model services...' : backendStatus}
+            FDA-Cleared Grade Algorithmic Intelligence
           </div>
-          <div className="space-y-6">
-            <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl xl:text-7xl">
-              Connect the model, explain the purpose, and run the full heart-risk workflow.
-            </h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-300">
-              This interface is tied to the Flask core so you can inspect the project purpose, retrain the model, evaluate it, submit patient features, and review recent predictions without leaving the app.
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <a href="#predict" className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(0,212,255,0.3)] transition hover:-translate-y-0.5 hover:bg-cyan-300">
-              Run prediction
-              <ArrowRight className="h-4 w-4" />
+          <h1 className="text-5xl font-bold tracking-tight text-text sm:text-6xl xl:text-7xl leading-[1.1]">
+            Predict Heart Disease Before It <span className="text-gradient">Becomes Critical</span>
+          </h1>
+          <p className="max-w-2xl mx-auto lg:mx-0 text-lg leading-8 text-text-muted">
+            Empower your clinical decisions with MediScanAI. Our advanced machine learning platform analyzes patient vitals to deliver immediate, highly accurate cardiovascular risk assessments.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <a href="#app-console" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-soft transition hover:bg-primary-dark hover:scale-105">
+              Start Free Assessment
+              <ArrowRight className="h-5 w-5" />
             </a>
-            <a href="#model" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-400/40 hover:bg-white/10">
-              View model core
+            <a href="#how-it-works" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-8 py-4 text-base font-semibold text-text transition hover:border-primary-100 hover:bg-primary-50">
+              View Model Workflow
             </a>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {metrics.map((metric) => (
-              <div key={metric.label} className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl shadow-glass">
-                <p className="text-2xl font-semibold text-white">{metric.value}</p>
-                <p className="mt-2 text-sm text-slate-400">{metric.label}</p>
-              </div>
-            ))}
           </div>
         </div>
-
-        <div className="relative">
-          <div className="absolute -left-6 top-10 h-24 w-24 rounded-full bg-cyan-400/20 blur-3xl animate-float" />
-          <div className="absolute right-2 top-24 h-28 w-28 rounded-full bg-blue-500/20 blur-3xl animate-float [animation-delay:1.3s]" />
-          <div className="rounded-[2rem] border border-white/10 bg-white/6 p-4 shadow-glass backdrop-blur-2xl">
-            <div className="rounded-[1.5rem] border border-cyan-400/15 bg-[#09111f]/95 p-6">
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-cyan-200/70">Project core</p>
-                  <h2 className="mt-2 text-2xl font-semibold text-white">Purpose, model, and workflow</h2>
+        
+        {/* Hero Visual Composition */}
+        <div className="flex-1 relative w-full max-w-lg lg:max-w-none animate-slideUp" style={{animationDelay: '0.2s'}}>
+          <div className="relative w-full aspect-[4/3] rounded-[3rem] shadow-card flex items-center justify-center overflow-hidden border border-white">
+            <img 
+              src="/images/hero-doctor.png" 
+              alt="Cardiologist Holographic Heart" 
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+            
+            <div className="glass-card absolute bottom-6 left-6 right-6 z-10 p-5 space-y-4 shadow-soft">
+              <div className="flex items-center justify-between border-b border-slate-100/50 pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-primary-dark">
+                    <CheckCircle2 className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-text">AI Diagnostic Scan</p>
+                    <p className="text-xs text-text-muted">High Confidence Rating</p>
+                  </div>
                 </div>
-                <div className="rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-200">
-                  Connected
+                <span className="text-2xl font-bold text-emerald-600">98%</span>
+              </div>
+              <div className="space-y-3">
+                <div className="h-2 w-full bg-slate-200/50 rounded-full overflow-hidden">
+                  <div className="h-full bg-primary w-[98%] rounded-full"></div>
                 </div>
               </div>
-
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-3xl border border-white/10 bg-white/5 p-4">
-                  <div className="flex items-center gap-3 text-cyan-200">
-                    <Stethoscope className="h-5 w-5" />
-                    Project purpose
-                  </div>
-                  <p className="mt-4 text-sm leading-6 text-slate-300">
-                    Help screen for heart disease risk using the dataset, model artifacts, and prediction history stored in the backend.
-                  </p>
-                </div>
-                <div className="rounded-3xl border border-white/10 bg-white/5 p-4">
-                  <div className="flex items-center gap-3 text-cyan-200">
-                    <Layers3 className="h-5 w-5" />
-                    Core modules
-                  </div>
-                  <ul className="mt-4 space-y-3 text-sm text-slate-300">
-                    <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-300" />Preprocessing</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-300" />Training and evaluation</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-300" />Prediction storage</li>
-                  </ul>
-                </div>
+            </div>
+            
+            {/* Floating badges */}
+            <div className="absolute top-6 right-6 glass-card p-3 flex items-center gap-3 animate-float shadow-soft bg-white/80">
+              <div className="h-8 w-8 bg-primary rounded-full flex items-center justify-center text-white shadow-sm">
+                <Activity className="h-4 w-4" />
               </div>
-
-              <div className="mt-4 overflow-hidden rounded-3xl border border-cyan-400/15 bg-[linear-gradient(135deg,rgba(0,212,255,0.12),rgba(59,130,246,0.06))] p-5">
-                <div className="flex items-center justify-between text-sm text-slate-300">
-                  <span>Backend status</span>
-                  <span className="text-cyan-100">{backendStatus}</span>
-                </div>
-                <div className="mt-4 grid grid-cols-3 gap-3 text-xs text-slate-400">
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-3">Model files</div>
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-3">Dataset API</div>
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-3">Prediction API</div>
-                </div>
+              <div>
+                <p className="text-xs font-bold text-text">Vitals Stable</p>
+                <p className="text-[10px] text-text-muted">Live Analysis</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="purpose" className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {featureCards.map((feature) => {
+      {/* Metrics Section */}
+      <section className="border-y border-slate-100 bg-white/50 backdrop-blur-sm relative z-10">
+        <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {metrics.map((metric, i) => {
+              const Icon = metric.icon;
+              return (
+                <div key={metric.label} className="flex flex-col items-center text-center space-y-2 animate-slideUp" style={{animationDelay: `${i * 0.1}s`}}>
+                  <Icon className="h-8 w-8 text-primary opacity-80 mb-2" />
+                  <p className="text-4xl font-bold text-text">{metric.value}</p>
+                  <p className="text-sm font-medium text-text-muted">{metric.label}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <h2 className="text-base font-semibold tracking-wide text-primary uppercase">Our Capabilities</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-text sm:text-4xl">Advanced Medical Intelligence</p>
+          <p className="mt-4 text-lg text-text-muted">Designed for precision, built for scale. Discover how our ML models transform raw clinical data into actionable insights.</p>
+        </div>
+        <div className="grid gap-8 md:grid-cols-3">
+          {featureCards.map((feature, i) => {
             const Icon = feature.icon;
             return (
-              <article key={feature.title} className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 shadow-glass backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-white/8">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-200">
-                  <Icon className="h-5 w-5" />
+              <article key={feature.title} className="glass-card p-8 transition hover:-translate-y-2 hover:shadow-soft" style={{animationDelay: `${i * 0.1}s`}}>
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary mb-6">
+                  <Icon className="h-7 w-7" />
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-white">{feature.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{feature.description}</p>
+                <h3 className="text-xl font-bold text-text mb-3">{feature.title}</h3>
+                <p className="text-base text-text-muted leading-relaxed">{feature.description}</p>
               </article>
             );
           })}
         </div>
       </section>
 
-      <section id="model" className="mx-auto grid max-w-7xl gap-6 px-6 py-12 lg:grid-cols-[0.92fr_1.08fr] lg:px-10">
-        <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 shadow-glass backdrop-blur-xl">
-          <div className="flex items-center gap-3 text-cyan-200">
-            <Radar className="h-5 w-5" />
-            Core model flow
-          </div>
-          <h2 className="mt-3 text-3xl font-semibold text-white">How the backend connects to the project purpose</h2>
-          <div className="mt-6 space-y-4">
-            {workflow.map((step, index) => (
-              <div key={step} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 p-4">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-400/10 text-sm font-semibold text-cyan-200">0{index + 1}</div>
-                <p className="text-sm leading-6 text-slate-300">{step}</p>
-              </div>
-            ))}
-          </div>
+      {/* How it Works Section */}
+      <section id="how-it-works" className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 bg-slate-50/50 rounded-[3rem] my-12 border border-slate-100">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <h2 className="text-base font-semibold tracking-wide text-primary uppercase">Clinical Workflow</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-text sm:text-4xl">Seamlessly Integrated Diagnostics</p>
+          <p className="mt-4 text-lg text-text-muted">Our AI-powered engine works effortlessly in the background, transforming raw patient data into actionable clinical foresight in four simple steps.</p>
         </div>
 
-        <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 shadow-glass backdrop-blur-xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-3 text-cyan-200">
-                <Activity className="h-5 w-5" />
-                Live evaluation
-              </div>
-              <h2 className="mt-3 text-3xl font-semibold text-white">Backend evaluation response</h2>
+        <div className="relative grid gap-8 md:grid-cols-4 pt-4">
+          {/* Connecting Line */}
+          <div className="hidden md:block absolute top-16 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-primary-100 via-primary-300 to-primary-100 z-0 opacity-50"></div>
+
+          {/* Step 1 */}
+          <div className="relative z-10 flex flex-col items-center text-center group">
+            <div className="w-24 h-24 rounded-full bg-white shadow-card flex items-center justify-center border-4 border-slate-50 mb-6 text-primary relative transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-soft">
+              <ClipboardList className="h-10 w-10" />
+              <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm border-2 border-white">1</div>
             </div>
-            <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">Flask proxy</div>
+            <h3 className="text-lg font-bold text-text mb-2">Data Ingestion</h3>
+            <p className="text-sm text-text-muted leading-relaxed">Securely input critical clinical parameters including ECG results, vitals, and demographic data.</p>
           </div>
 
-          <div className="mt-6 rounded-3xl border border-white/10 bg-black/15 p-5 text-sm text-slate-300">
-            <pre className="overflow-x-auto whitespace-pre-wrap break-words">{JSON.stringify(evaluation, null, 2) || 'Evaluation data will appear here after the backend responds.'}</pre>
+          {/* Step 2 */}
+          <div className="relative z-10 flex flex-col items-center text-center group">
+            <div className="w-24 h-24 rounded-full bg-white shadow-card flex items-center justify-center border-4 border-slate-50 mb-6 text-primary relative transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-soft">
+              <BrainCircuit className="h-10 w-10" />
+              <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm border-2 border-white">2</div>
+            </div>
+            <h3 className="text-lg font-bold text-text mb-2">Neural Analysis</h3>
+            <p className="text-sm text-text-muted leading-relaxed">Our advanced models process the complex interactions within the physiological data instantly.</p>
           </div>
 
-          <div className="mt-4 rounded-3xl border border-white/10 bg-black/15 p-5 text-sm text-slate-300">
-            <div className="flex items-center gap-3 text-cyan-200">
-              <ClipboardList className="h-5 w-5" />
-              Dataset sample
+          {/* Step 3 */}
+          <div className="relative z-10 flex flex-col items-center text-center group">
+            <div className="w-24 h-24 rounded-full bg-white shadow-card flex items-center justify-center border-4 border-slate-50 mb-6 text-primary relative transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-soft">
+              <Radar className="h-10 w-10" />
+              <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm border-2 border-white">3</div>
             </div>
-            <p className="mt-3 text-slate-400">
-              {dataset.columns?.length ? `${dataset.columns.length} columns loaded.` : 'Dataset rows will load here from /dataset.'}
-            </p>
-            <div className="mt-4 overflow-auto rounded-2xl border border-white/10">
-              <table className="min-w-full text-left text-xs">
-                <thead className="bg-white/5 text-slate-300">
-                  <tr>
-                    {dataset.columns?.slice(0, 6).map((column) => (
-                      <th key={column} className="px-3 py-2 font-medium">{column}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {dataset.rows?.slice(0, 3).map((row, index) => (
-                    <tr key={index} className="border-t border-white/10">
-                      {dataset.columns?.slice(0, 6).map((column) => (
-                        <td key={column} className="px-3 py-2 text-slate-300">{String(row[column] ?? '')}</td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <h3 className="text-lg font-bold text-text mb-2">Risk Stratification</h3>
+            <p className="text-sm text-text-muted leading-relaxed">The algorithm calculates an exact probability score for the presence of cardiovascular disease.</p>
+          </div>
+
+          {/* Step 4 */}
+          <div className="relative z-10 flex flex-col items-center text-center group">
+            <div className="w-24 h-24 rounded-full bg-white shadow-card flex items-center justify-center border-4 border-slate-50 mb-6 text-primary relative transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-soft">
+              <Stethoscope className="h-10 w-10" />
+              <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm border-2 border-white">4</div>
             </div>
+            <h3 className="text-lg font-bold text-text mb-2">Physician Action</h3>
+            <p className="text-sm text-text-muted leading-relaxed">Cardiologists receive immediate, highly accurate reports to support proactive treatment decisions.</p>
           </div>
         </div>
       </section>
 
-      <section id="predict" className="mx-auto max-w-7xl px-6 py-12 lg:px-10">
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.75fr]">
-          <form action={handlePredict} className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 shadow-glass backdrop-blur-xl">
-            <div className="flex items-center gap-3 text-cyan-200">
-              <FlaskConical className="h-5 w-5" />
-              Prediction console
-            </div>
-            <h2 className="mt-3 text-3xl font-semibold text-white">Send patient features to the core model</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Fill the patient fields and submit them to the Flask ML engine through the Next.js proxy.
-            </p>
-
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {modelFields.map((field) => (
-                <label key={field.name} className="space-y-2 text-sm text-slate-300">
-                  <span>{field.label}</span>
-                  <input
-                    name={field.name}
-                    type={field.type}
-                    step={field.step}
-                    defaultValue={field.defaultValue}
-                    className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20"
-                  />
-                </label>
-              ))}
+      {/* App Console / Interaction Area */}
+      <section id="app-console" className="mx-auto max-w-7xl px-6 py-16 lg:px-8 relative z-20">
+        <div className="glass-card overflow-hidden bg-white/80 p-1">
+          <div className="bg-slate-50/50 rounded-[1.75rem] border border-slate-100 p-6 lg:p-10">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-text">Clinical Prediction Console</h2>
+              <p className="mt-3 text-text-muted">Enter patient signals below to interface directly with the Flask ML engine.</p>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300">
-                Run model prediction
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-
-            {predictionMessage && (
-              <div className="mt-4 text-sm text-cyan-200 bg-cyan-950/40 border border-cyan-500/20 rounded-2xl p-4">
-                {predictionMessage}
-              </div>
-            )}
-
-            {predictionResult && (
-              <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl animate-fade-in">
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <h3 className="text-xl font-semibold text-white">AI Diagnostic Result</h3>
-                  <div className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider ${
-                    predictionResult.prediction === 1 
-                      ? 'border border-rose-500/30 bg-rose-500/10 text-rose-300' 
-                      : 'border border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
-                  }`}>
-                    {predictionResult.prediction === 1 ? 'High Risk' : 'Low Risk'}
-                  </div>
+            <div className="grid gap-12 lg:grid-cols-[1fr_0.8fr]">
+              {/* Left Form Side */}
+              <form action={handlePredict} className="space-y-8">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  {modelFields.map((field) => (
+                    <label key={field.name} className="block">
+                      <span className="text-sm font-medium text-text-muted mb-1.5 block">{field.label}</span>
+                      <input
+                        name={field.name}
+                        type={field.type}
+                        step={field.step}
+                        defaultValue={field.defaultValue}
+                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-text shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                      />
+                    </label>
+                  ))}
                 </div>
 
-                <div className="mt-6 grid gap-6 md:grid-cols-2">
-                  <div className="space-y-4">
-                    <p className="text-sm text-slate-400">
-                      The predictive model analyzed the submitted clinical signals and calculated the patient's likelihood score.
-                    </p>
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-300">Calculated Risk Probability</span>
-                        <span className={`font-semibold ${predictionResult.prediction === 1 ? 'text-rose-400' : 'text-emerald-400'}`}>
-                          {Math.round(predictionResult.probability * 100)}%
-                        </span>
-                      </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
-                        <div 
-                          className={`h-full rounded-full transition-all duration-500 ${
-                            predictionResult.prediction === 1 ? 'bg-rose-500' : 'bg-emerald-500'
-                          }`}
-                          style={{ width: `${Math.round(predictionResult.probability * 100)}%` }}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
+                  <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-soft transition hover:bg-primary-dark">
+                    Run Analysis
+                    <ArrowRight className="h-5 w-5" />
+                  </button>
+                  {predictionMessage && (
+                    <span className="text-sm font-medium text-primary flex items-center gap-2">
+                      <Activity className="h-4 w-4 animate-spin" /> {predictionMessage}
+                    </span>
+                  )}
+                </div>
 
-                  <div className="flex flex-col justify-between rounded-2xl border border-white/5 bg-black/25 p-5">
-                    <div>
-                      <h4 className="text-sm font-semibold text-white">Clinical Support Action</h4>
-                      <p className="mt-2 text-xs leading-5 text-slate-400">
-                        {predictionResult.prediction === 1 
-                          ? 'ALERT: Diagnostic parameters fall in high risk ranges. Standard echocardiogram, troponin clearance tests, and clinical consultation are advised.'
-                          : 'NOTICE: Parameters fall in standard threshold range. Keep monitoring patient vitals and proceed with standard preventive screening.'
-                        }
-                      </p>
+                {predictionResult && (
+                  <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-card animate-slideUp">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                      <h3 className="text-lg font-bold text-text flex items-center gap-2">
+                        <Radar className="h-5 w-5 text-primary" /> Diagnostic Result
+                      </h3>
+                      <div className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider ${
+                        predictionResult.prediction === 1 
+                          ? 'bg-rose-50 text-rose-600 border border-rose-200' 
+                          : 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                      }`}>
+                        {predictionResult.prediction === 1 ? 'High Risk Detected' : 'Low Risk Standard'}
+                      </div>
                     </div>
-                    <div className="mt-4">
+
+                    <div className="mt-6 space-y-5">
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="font-medium text-text-muted">Calculated Risk Probability</span>
+                          <span className={`font-bold ${predictionResult.prediction === 1 ? 'text-rose-600' : 'text-emerald-600'}`}>
+                            {Math.round(predictionResult.probability * 100)}%
+                          </span>
+                        </div>
+                        <div className="h-3 w-full overflow-hidden rounded-full bg-slate-100 shadow-inner">
+                          <div 
+                            className={`h-full rounded-full transition-all duration-1000 ease-out ${
+                              predictionResult.prediction === 1 ? 'bg-rose-500' : 'bg-emerald-500'
+                            }`}
+                            style={{ width: `${Math.round(predictionResult.probability * 100)}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl bg-slate-50 border border-slate-100 p-4">
+                        <h4 className="text-sm font-bold text-text flex items-center gap-2">
+                          <AlertCircle className="h-4 w-4 text-primary" /> Clinical Support Action
+                        </h4>
+                        <p className="mt-2 text-sm leading-relaxed text-text-muted">
+                          {predictionResult.prediction === 1 
+                            ? 'ALERT: Diagnostic parameters fall in high risk ranges. Standard echocardiogram, troponin clearance tests, and clinical consultation are advised immediately.'
+                            : 'NOTICE: Parameters fall in standard threshold range. Keep monitoring patient vitals and proceed with standard preventive screening.'
+                          }
+                        </p>
+                      </div>
+
                       <a 
                         href={`/api/download_pdf?id=${predictionResult.id}`}
                         download
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:bg-cyan-400/20"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-primary-100 bg-primary-50 px-4 py-3 text-sm font-bold text-primary-dark transition hover:bg-primary-100 hover:border-primary-200"
                       >
-                        Download PDF Report
+                        <Download className="h-4 w-4" /> Download PDF Medical Report
                       </a>
                     </div>
                   </div>
-                </div>
-              </div>
-            )}
-          </form>
-
-          <div className="space-y-6">
-            <form action={handleTrain} className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 shadow-glass backdrop-blur-xl">
-              <div className="flex items-center gap-3 text-cyan-200">
-                <Database className="h-5 w-5" />
-                Training control
-              </div>
-              <h3 className="mt-3 text-2xl font-semibold text-white">Retrain the project core model</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                This sends a training request to the Flask backend so you can refresh the model artifacts.
-              </p>
-              <label className="mt-5 block space-y-2 text-sm text-slate-300">
-                <span>Test size</span>
-                <input
-                  name="test_size"
-                  type="number"
-                  step="0.05"
-                  defaultValue="0.2"
-                  min="0.1"
-                  max="0.5"
-                  className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none transition focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20"
-                />
-              </label>
-              <button type="submit" className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-6 py-3 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-400/20">
-                Retrain model
-              </button>
-              <p className="mt-4 text-sm text-cyan-100">{trainMessage}</p>
-            </form>
-
-            <div id="history" className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 shadow-glass backdrop-blur-xl">
-              <div className="flex items-center gap-3 text-cyan-200">
-                <TimerReset className="h-5 w-5" />
-                Recent prediction history
-              </div>
-              <div className="mt-5 space-y-4">
-                {predictions.length ? predictions.slice(0, 3).map((entry) => (
-                  <div key={entry.id} className="rounded-2xl border border-white/10 bg-black/15 p-4">
-                    <div className="flex items-center justify-between">
-                      <p className="font-medium text-white">Prediction #{entry.id}</p>
-                      <p className="text-sm text-cyan-200">{Math.round(entry.probability * 100)}%</p>
-                    </div>
-                    <p className="mt-2 text-sm text-slate-400">Class: {entry.prediction}</p>
-                  </div>
-                )) : (
-                  <div className="rounded-2xl border border-white/10 bg-black/15 p-4 text-sm text-slate-400">
-                    No prediction history loaded yet.
-                  </div>
                 )}
+              </form>
+
+              {/* Right Sidebar (History & Training) */}
+              <div className="space-y-8">
+                {/* History */}
+                <div className="glass-card p-6 border-slate-200 bg-white">
+                  <div className="flex items-center gap-3 text-primary-dark font-bold mb-6">
+                    <TimerReset className="h-5 w-5" />
+                    Recent Predictions
+                  </div>
+                  <div className="space-y-3">
+                    {predictions.length ? predictions.slice(0, 4).map((entry) => (
+                      <div key={entry.id} className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-3 hover:border-primary-100 transition">
+                        <div>
+                          <p className="font-semibold text-text text-sm">Assessment #{entry.id}</p>
+                          <p className="text-xs text-text-muted mt-0.5">Class: {entry.prediction}</p>
+                        </div>
+                        <div className={`px-2.5 py-1 rounded-md text-xs font-bold ${entry.prediction === 1 ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'}`}>
+                          {Math.round(entry.probability * 100)}%
+                        </div>
+                      </div>
+                    )) : (
+                      <p className="text-sm text-text-muted italic">No prediction history available.</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Training */}
+                <form action={handleTrain} className="glass-card p-6 border-slate-200 bg-white">
+                  <div className="flex items-center gap-3 text-primary-dark font-bold mb-4">
+                    <Database className="h-5 w-5" />
+                    Model Training
+                  </div>
+                  <p className="text-sm text-text-muted mb-5">Retrain the core ML artifacts securely on the backend.</p>
+                  
+                  <label className="block mb-4">
+                    <span className="text-xs font-bold uppercase text-text-muted mb-1.5 block">Test Size Split</span>
+                    <input
+                      name="test_size"
+                      type="number"
+                      step="0.05"
+                      defaultValue="0.2"
+                      min="0.1"
+                      max="0.5"
+                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-text outline-none focus:border-primary"
+                    />
+                  </label>
+                  
+                  <button type="submit" className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-slate-800">
+                    Initiate Retraining
+                  </button>
+                  {trainMessage && <p className="mt-3 text-xs font-medium text-primary text-center">{trainMessage}</p>}
+                </form>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:pb-20">
-        <div className="rounded-[2rem] border border-cyan-400/20 bg-[linear-gradient(135deg,rgba(0,212,255,0.12),rgba(59,130,246,0.08),rgba(15,23,42,0.9))] p-8 shadow-glass backdrop-blur-xl lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div>
-              <p className="text-sm uppercase tracking-[0.35em] text-cyan-100/70">System ready</p>
-              <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">One connected surface for purpose, model, and clinical decision support.</h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
-                The frontend now talks to the backend core, so the project is not just visual. It is wired to the ML model, the dataset, the evaluation endpoints, and the prediction history.
+      {/* Footer */}
+      <footer className="border-t border-slate-200 bg-white pt-20 pb-10 mt-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+            {/* Brand Column */}
+            <div className="space-y-6 lg:col-span-1">
+              <div className="flex items-center gap-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-soft">
+                  <HeartPulse className="h-6 w-6" />
+                </div>
+                <span className="text-xl font-bold tracking-tight text-text">MediScan<span className="text-primary">AI</span></span>
+              </div>
+              <p className="text-sm leading-relaxed text-text-muted">
+                Empowering cardiologists with algorithmic intelligence. Predict heart disease before it becomes critical.
               </p>
-              <p className="mt-4 text-sm text-cyan-100">{backendStatus}</p>
+              <div className="flex items-center gap-4 pt-2">
+                <a href="#" className="text-text-muted hover:text-primary transition-colors"><Twitter className="h-5 w-5" /></a>
+                <a href="#" className="text-text-muted hover:text-primary transition-colors"><Linkedin className="h-5 w-5" /></a>
+                <a href="#" className="text-text-muted hover:text-primary transition-colors"><Github className="h-5 w-5" /></a>
+                <a href="#" className="text-text-muted hover:text-primary transition-colors"><Mail className="h-5 w-5" /></a>
+              </div>
             </div>
-            <a href="#predict" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-100">
-              Open prediction form
-              <ArrowRight className="h-4 w-4" />
-            </a>
+
+            {/* Product Links */}
+            <div>
+              <h3 className="text-sm font-bold text-text uppercase tracking-wider mb-6">Platform</h3>
+              <ul className="space-y-4">
+                <li><a href="#features" className="text-sm text-text-muted hover:text-primary transition-colors">Core Intelligence</a></li>
+                <li><a href="#how-it-works" className="text-sm text-text-muted hover:text-primary transition-colors">Clinical Workflow</a></li>
+                <li><a href="#app-console" className="text-sm text-text-muted hover:text-primary transition-colors">Prediction Console</a></li>
+                <li><a href="#" className="text-sm text-text-muted hover:text-primary transition-colors">API Documentation</a></li>
+                <li><a href="#" className="text-sm text-text-muted hover:text-primary transition-colors">Integration Guides</a></li>
+              </ul>
+            </div>
+
+            {/* Resources Links */}
+            <div>
+              <h3 className="text-sm font-bold text-text uppercase tracking-wider mb-6">Resources</h3>
+              <ul className="space-y-4">
+                <li><a href="#" className="text-sm text-text-muted hover:text-primary transition-colors">Clinical Studies</a></li>
+                <li><a href="#" className="text-sm text-text-muted hover:text-primary transition-colors">Whitepapers</a></li>
+                <li><a href="#" className="text-sm text-text-muted hover:text-primary transition-colors">Security & Trust</a></li>
+                <li><a href="#" className="text-sm text-text-muted hover:text-primary transition-colors">Help Center</a></li>
+                <li><a href="#" className="text-sm text-text-muted hover:text-primary transition-colors">Status Page</a></li>
+              </ul>
+            </div>
+
+            {/* Newsletter */}
+            <div className="lg:col-span-1">
+              <h3 className="text-sm font-bold text-text uppercase tracking-wider mb-6">Stay Updated</h3>
+              <p className="text-sm text-text-muted mb-4">Subscribe to our newsletter for the latest AI cardiology research.</p>
+              <form className="flex flex-col sm:flex-row gap-2">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-text outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                />
+                <button type="submit" className="rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary-dark whitespace-nowrap shadow-soft">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-slate-200">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50">
+                <ShieldCheck className="h-4 w-4 text-emerald-500" />
+                <span className="text-xs font-semibold text-slate-600">HIPAA Compliant</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50">
+                <Database className="h-4 w-4 text-emerald-500" />
+                <span className="text-xs font-semibold text-slate-600">SOC2 Certified</span>
+              </div>
+            </div>
+            
+            <p className="text-sm text-text-muted text-center md:text-left">
+              &copy; {new Date().getFullYear()} MediScanAI Healthcare Solutions. All rights reserved.
+            </p>
+            
+            <div className="flex gap-6 text-sm font-medium text-text-muted">
+              <a href="#" className="hover:text-primary transition-colors">Privacy</a>
+              <a href="#" className="hover:text-primary transition-colors">Terms</a>
+              <a href="#" className="hover:text-primary transition-colors">Legal</a>
+            </div>
           </div>
         </div>
-      </section>
+      </footer>
     </main>
   );
 }

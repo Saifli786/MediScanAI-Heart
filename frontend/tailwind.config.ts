@@ -1,49 +1,57 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  darkMode: ['class'],
   content: ['./app/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}', './lib/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
-        bg: '#050816',
-        bgAlt: '#0A1020',
-        primary: '#00D4FF',
-        secondary: '#3B82F6',
-        success: '#10B981',
-        danger: '#EF4444',
-        muted: '#94A3B8'
+        background: '#f8fafc',
+        surface: '#ffffff',
+        primary: {
+          DEFAULT: '#0284c7',
+          light: '#38bdf8',
+          dark: '#0369a1',
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+        },
+        secondary: {
+          DEFAULT: '#10b981',
+          light: '#34d399',
+          dark: '#059669',
+        },
+        text: {
+          DEFAULT: '#0f172a',
+          muted: '#64748b',
+          light: '#94a3b8',
+        }
       },
       boxShadow: {
-        glow: '0 0 30px rgba(0, 212, 255, 0.18)',
-        glass: '0 24px 80px rgba(0, 0, 0, 0.38)'
+        glass: '0 8px 32px 0 rgba(14, 165, 233, 0.1)',
+        card: '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+        soft: '0 10px 40px -10px rgba(2, 132, 199, 0.15)',
       },
       backgroundImage: {
-        'hero-radial': 'radial-gradient(circle at top, rgba(0, 212, 255, 0.16), transparent 34%), radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.12), transparent 24%), linear-gradient(180deg, #050816 0%, #0A1020 100%)'
+        'hero-gradient': 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%)',
+        'glass-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-12px)' }
+          '50%': { transform: 'translateY(-15px)' }
         },
-        pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 0 rgba(0, 212, 255, 0)' },
-          '50%': { boxShadow: '0 0 28px rgba(0, 212, 255, 0.22)' }
+        pulseSoft: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.7' }
         },
-        sweep: {
-          '0%': { transform: 'translateX(-100%) skewX(-16deg)' },
-          '100%': { transform: 'translateX(100%) skewX(-16deg)' }
-        },
-        blink: {
-          '0%, 49%': { opacity: '1' },
-          '50%, 100%': { opacity: '0' }
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' }
         }
       },
       animation: {
-        float: 'float 5s ease-in-out infinite',
-        pulseGlow: 'pulseGlow 2.6s ease-in-out infinite',
-        sweep: 'sweep 7s linear infinite',
-        blink: 'blink 1s steps(1, end) infinite'
+        float: 'float 6s ease-in-out infinite',
+        pulseSoft: 'pulseSoft 3s ease-in-out infinite',
+        slideUp: 'slideUp 0.6s ease-out forwards'
       }
     }
   },

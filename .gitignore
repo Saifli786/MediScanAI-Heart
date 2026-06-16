@@ -19,9 +19,6 @@ pip-delete-this-directory.txt
 predictions.db
 predictions.db-journal
 
-# Models and temporary files
-models/*.joblib
-exports/
 
 # Node / Next.js
 node_modules/

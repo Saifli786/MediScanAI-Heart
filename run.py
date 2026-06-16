@@ -496,7 +496,7 @@ def start_frontend_and_browser():
     if not os.path.exists(node_modules_dir):
         print("[-] Next.js node_modules not found. Installing dependencies (this may take a minute)...")
         try:
-            subprocess.run(['npm', 'install'], cwd=frontend_dir, shell=True, check=True)
+            subprocess.run('npm install', cwd=frontend_dir, shell=True, check=True)
             print("[+] Dependencies installed successfully.")
         except Exception as e:
             print(f"[!] Failed to run npm install: {e}")
@@ -506,7 +506,7 @@ def start_frontend_and_browser():
     # 2. Start Next.js development server
     print("[+] Starting Next.js frontend server...")
     try:
-        frontend_process = subprocess.Popen(['npm', 'run', 'dev'], cwd=frontend_dir, shell=True)
+        frontend_process = subprocess.Popen('npm run dev', cwd=frontend_dir, shell=True)
     except Exception as e:
         print(f"[!] Failed to start Next.js frontend server: {e}")
         return
@@ -530,6 +530,6 @@ if __name__ == '__main__':
     t.start()
 
     try:
-        app.run(debug=True)
+        app.run(debug=True, port=5001)
     except KeyboardInterrupt:
         kill_frontend()

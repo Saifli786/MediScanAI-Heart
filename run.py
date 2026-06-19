@@ -17,7 +17,10 @@ import socket
 import atexit
 import sys
 
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
 app.secret_key = 'your_secret_key_here'  # Change this in production
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
@@ -529,6 +532,13 @@ def check_and_retrain_models():
 def start_frontend_and_browser():
     global frontend_process
     
+    # Do not spawn frontend process in production/Render or if explicit bypass is set
+    if (os.environ.get('RENDER') == 'true' or 
+        os.environ.get('FLASK_ENV') == 'production' or 
+        os.environ.get('SKIP_FRONTEND') == 'true'):
+        print("[*] Skipping automatic frontend start (production/Render/SKIP_FRONTEND env detected).")
+        return
+
     # Only run this in the main reloader parent process, not the child reloader process.
     if os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
         return
